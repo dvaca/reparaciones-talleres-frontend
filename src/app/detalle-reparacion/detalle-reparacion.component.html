@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+      <div class="col col-lg-2">
+        
+      </div>
+      <div *ngIf="reparacionActual" class="col col-lg-8">
+          <div *ngFor="let evidencia of reparacionActual.evidencias" class='col-sm-6'>
+            <img [src]="evidencia.foto"/>
+            {{evidencia.descripcion}}
+          </div>
+      </div>
+      <div class="col col-lg-2">
+        
+      </div>
+  </div>
+</div>

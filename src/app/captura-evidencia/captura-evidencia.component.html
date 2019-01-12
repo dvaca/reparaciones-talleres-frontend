@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+      <div class="col col-lg-4">
+        <h4>
+            Datos del vehículo
+          </h4>
+          <form>
+              <div class="form-group">
+                <div class="row">
+                  <div class='col-sm-6'>
+                    <label for="txtPlaca" class="control-label">Placa</label>
+                    <div>
+                      <input type="text" readonly class="form-control" 
+                      [(ngModel)]="vehiculo.placa" name="placa" id="txtPlaca">
+                    </div>
+                  </div>
+                  <div class='col-sm-6'>
+                    <label for="txtModelo" class="control-label">Modelo</label>
+                    <div>
+                      <input type="text" readonly class="form-control"  
+                      [(ngModel)]="vehiculo.modelo" name="modelo" id="txtModelo">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class='col-sm-6'>
+                      <label for="txtMarca" class="control-label">Marca</label>
+                      <div>
+                        <input type="text" readonly class="form-control" 
+                        [(ngModel)]="vehiculo.marca" name="marca" id="txtMarca">
+                      </div>
+                    </div>
+                    <div class='col-sm-6'>
+                      <label for="txtLinea" class="control-label">Linea</label>
+                      <div>
+                        <input type="text" readonly class="form-control"  
+                        [(ngModel)]="vehiculo.linea" name="linea" id="txtLinea">
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </form>
+      </div>
+      <div class="col col-lg-6">
+          <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+            width="300" height="300"></webcam>
+          <div *ngIf="foto">
+            <img [src]="foto.imageAsDataUrl"/>
+            <textarea class="form-control" [(ngModel)]="evidenciaActual.descripcion" 
+                rows="3" placeholder="Descripción"></textarea>
+          </div>
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div *ngFor="let evidencia of reparacionActual.evidencias" class="carousel-item">
+                  <img [src]="evidencia.foto" alt="...">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>{{evidencia.descripcion}}</h5>
+                    <p>BBBB</p>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <carousel>
+              <slide *ngFor="let evidencia of reparacionActual.evidencias">
+                <img [src]="evidencia.foto" alt="first slide" style="display: block; width: 100%;">
+                <div class="carousel-caption d-none d-md-block">
+                  <p>{{evidencia.descripcion}}</p>
+                </div>
+              </slide>
+            </carousel>
+          <!--<div *ngFor="let evidencia of reparacionActual.evidencias" class='col-sm-6'>
+            <img [src]="evidencia.foto"/>
+            {{evidencia.descripcion}}
+          </div>-->
+          <button type="button" class="btn btn-outline-secondary" (click)="tomarFoto();">Tomar foto</button>
+          <button type="button" class="btn btn-outline-warning" (click)="agregarFoto();">Agregar</button>
+          <button type="button" class="btn btn-outline-primary" (click)="guardarReparacion();">Guardar</button>
+      </div>
+      <div class="col col-lg-2">
+        
+      </div>
+  </div>
+</div>
