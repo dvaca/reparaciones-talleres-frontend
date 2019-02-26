@@ -18,6 +18,7 @@ export class CapturaEvidenciaComponent implements OnInit {
   private trigger: Subject<void> = new Subject<void>();
   reparacionActual: Reparacion;
   evidenciaActual: Evidencia;
+  valorTotal: number;
   @Input() vehiculo: Vehiculo;
     
   constructor(private reparacionesService: ReparacionesService) { }
@@ -32,6 +33,7 @@ export class CapturaEvidenciaComponent implements OnInit {
       });
     }else{
     }
+    this.valorTotal = 0;
   }
 
   public tomarFoto(): void {
@@ -50,6 +52,7 @@ export class CapturaEvidenciaComponent implements OnInit {
 
   public agregarFoto(): void {
     this.reparacionActual.evidencias.push(this.evidenciaActual);
+    this.valorTotal = +this.valorTotal + +this.evidenciaActual.valor;
   }
 
   public guardarReparacion(): void {

@@ -15,8 +15,8 @@ const httpOptions = {
 @Injectable()
 export class ReparacionesService {
 
-  //private backendUrl = 'http://localhost:4010';
-  private backendUrl = 'http://192.168.0.5:4010';
+  private backendUrl = 'http://localhost:4010';
+  //private backendUrl = 'http://192.168.0.6:4010';
   constructor(private http: HttpClient) { }
 
   getReparacion(id: number): Observable<Reparacion> {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Reparacion } from '../reparacion';
 import { ReparacionesService } from '../reparaciones.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-reparacion',
@@ -11,10 +12,11 @@ export class DetalleReparacionComponent implements OnInit {
 
   reparacionActual: Reparacion;
 
-  constructor(private reparacionesService: ReparacionesService) { }
+  constructor( private route: ActivatedRoute, private reparacionesService: ReparacionesService) { }
 
   ngOnInit() {
-    this.reparacionesService.getReparacion(9)
+    let id = this.route.snapshot.paramMap.get('id');
+    this.reparacionesService.getReparacion(+id)
     .subscribe(reparacion => {
       this.reparacionActual = reparacion;
     });

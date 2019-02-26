@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-      <div class="col col-lg-4">
+      <div class="col col-lg-3">
         <h4>
             Datos del vehículo
           </h4>
@@ -38,45 +38,101 @@
                       </div>
                     </div>
                   </div>
+                  <div class="row">
+                    <div class='col-sm-6'>
+                      <label for="txtValorTotal" class="control-label">Valor Total</label>
+                      <div>
+                        <input type="number" readonly class="form-control font-weight-bold" 
+                        [(ngModel)]="valorTotal" name="valorTotal" id="txtValorTotal">
+                      </div>
+                    </div>
+                  </div>
               </div>
           </form>
       </div>
-      <div class="col col-lg-6">
-          <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
-            width="300" height="300"></webcam>
-          <div *ngIf="foto">
-            <img [src]="foto.imageAsDataUrl"/>
-            <textarea class="form-control" [(ngModel)]="evidenciaActual.descripcion" 
-                rows="3" placeholder="Descripción"></textarea>
-          </div>
-          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              <div *ngFor="let evidencia of reparacionActual.evidencias" class="carousel-item">
-                  <img [src]="evidencia.foto" alt="...">
-                  <div class="carousel-caption d-none d-md-block">
-                    <h5>{{evidencia.descripcion}}</h5>
-                    <p>BBBB</p>
+      <div class="col col-lg-8">
+          <div class="row">
+              <div class="col col-lg-6 p-1">
+                  <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+                  width="300" height="300"></webcam>
+                  <br/>
+                  <button type="button" class="btn btn-outline-secondary" (click)="tomarFoto();">Tomar foto</button>
+                  <div *ngIf="foto" class="p-1">
+                    <img [src]="foto.imageAsDataUrl" width="300"/>
+                  </div>
+              </div>
+              <div class="col col-lg-6">
+                <div *ngIf="foto" class="p-1">
+                  <div class="row">
+                    <!--<img [src]="foto.imageAsDataUrl" width="300"/>-->
+                  </div>
+                  <div class="row">
+                    <div class="p-1">
+                      <form>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class='col-sm-12'>
+                              <label for="txtDescripcion" class="control-label">Descripción</label>
+                              <div>
+                                  <textarea class="form-control" [(ngModel)]="evidenciaActual.descripcion" 
+                                  placeholder="Descripción" name="descripcion" id="txtDescripcion"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class='col-sm-6'>
+                                <label for="txtMecanico" class="control-label">Mecánico</label>
+                                <div>
+                                <select class="form-control" id="pop_{{evidenciaActual.mecanico}}" [(ngModel)]="evidenciaActual.mecanico"
+                                name="mecanico" id="txtMecanico">
+                                    <!--<option *ngFor="let mecanico of mecanicos">{{mecanico.nombre}}</option>-->
+                                  <option>Sitripio Vergara</option>
+                                  <option>Medardo Rambután</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class='col-sm-6'>
+                              <label for="txtValor" class="control-label">Valor</label>
+                              <div>
+                                <input type="text" class="form-control"  
+                                [(ngModel)]="evidenciaActual.valor" name="valor" id="txtValor" 
+                                placeholder="Valor">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <button type="button" class="btn btn-outline-warning" (click)="agregarFoto();">Agregar</button>
+                  </div>
+                  <br/>
+                  <div class="row">
+                    <carousel>
+                      <slide *ngFor="let evidencia of reparacionActual.evidencias">
+                        <img [src]="evidencia.foto" alt="first slide" style="display: block; width: 100%;">
+                        <div class="carousel-caption d-none d-md-block">
+                          <h5>{{evidencia.descripcion}}</h5>
+                          <p>${{evidencia.valor}}</p>
+                          <p>{{evidencia.mecanico}}</p>
+                        </div>
+                      </slide>
+                    </carousel>
+                    <!--<div *ngFor="let evidencia of reparacionActual.evidencias" class='col-sm-6'>
+                      <img [src]="evidencia.foto"/>
+                      {{evidencia.descripcion}}
+                    </div>-->
+                  </div>
+                  <br/>
+                  <div class="row">
+                    <button type="button" class="btn btn-outline-primary" (click)="guardarReparacion();">Guardar</button>
                   </div>
                 </div>
-            </div>
+              </div>
           </div>
-          <carousel>
-              <slide *ngFor="let evidencia of reparacionActual.evidencias">
-                <img [src]="evidencia.foto" alt="first slide" style="display: block; width: 100%;">
-                <div class="carousel-caption d-none d-md-block">
-                  <p>{{evidencia.descripcion}}</p>
-                </div>
-              </slide>
-            </carousel>
-          <!--<div *ngFor="let evidencia of reparacionActual.evidencias" class='col-sm-6'>
-            <img [src]="evidencia.foto"/>
-            {{evidencia.descripcion}}
-          </div>-->
-          <button type="button" class="btn btn-outline-secondary" (click)="tomarFoto();">Tomar foto</button>
-          <button type="button" class="btn btn-outline-warning" (click)="agregarFoto();">Agregar</button>
-          <button type="button" class="btn btn-outline-primary" (click)="guardarReparacion();">Guardar</button>
       </div>
-      <div class="col col-lg-2">
+      <div class="col col-lg-1">
         
       </div>
   </div>
